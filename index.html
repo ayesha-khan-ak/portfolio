@@ -196,6 +196,24 @@ footer span{color:var(--aqua)}
 
 /* Soft section bg */
 .alt-bg{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean-mid),var(--ocean-deep))}
+
+/* Focus areas card (replaces skill bars) */
+.focus-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2rem 2.2rem;backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.focus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--sea),var(--teal),var(--seafoam))}
+.focus-title{font-size:0.78rem;font-family:'Fira Code',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.4rem}
+.focus-item{display:flex;gap:0.9rem;align-items:flex-start;padding:0.85rem 0;border-bottom:1px solid rgba(0,180,216,0.08)}
+.focus-item:last-child{border-bottom:none}
+.focus-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);margin-top:5px;flex-shrink:0}
+.focus-name{font-size:0.9rem;font-weight:600;color:var(--text);margin-bottom:2px}
+.focus-sub{font-size:0.76rem;color:var(--muted);font-family:'Fira Code',monospace}
+
+/* Project filter buttons */
+.proj-filters{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2.5rem}
+.filter-btn{padding:0.5rem 1.2rem;border-radius:50px;font-size:0.8rem;font-weight:500;font-family:'Inter',sans-serif;background:var(--card);color:var(--muted);border:1px solid var(--border);cursor:pointer;transition:all 0.3s}
+.filter-btn:hover{border-color:var(--teal);color:var(--aqua)}
+.filter-btn.active{background:linear-gradient(135deg,var(--sea),var(--teal));color:white;border-color:transparent;box-shadow:0 8px 20px rgba(0,180,216,0.25)}
+.proj-card{opacity:1;transform:scale(1);transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
+.proj-card.hidden{display:none}
 </style>
 </head>
 <body>
@@ -235,7 +253,7 @@ footer span{color:var(--aqua)}
       <a href="#contact" class="btn-secondary">Let's connect →</a>
     </div>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-num" data-target="15">0</div><div class="stat-label">Projects built</div></div>
+      <div class="stat-item"><div class="stat-num" data-target="19">0</div><div class="stat-label">Projects built</div></div>
       <div class="stat-item"><div class="stat-num" data-target="2">0</div><div class="stat-label">Internships</div></div>
       <div class="stat-item"><div class="stat-num" data-target="5">0</div><div class="stat-label">Certifications</div></div>
       <div class="stat-item"><div class="stat-num">3.06</div><div class="stat-label">CGPA</div></div>
@@ -261,12 +279,13 @@ footer span{color:var(--aqua)}
       </p>
     </div>
     <div class="reveal-right">
-      <div class="skill-row"><div class="skill-info"><span class="skill-name">React / Frontend Development</span><span class="skill-pct">88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88"></div></div></div>
-      <div class="skill-row"><div class="skill-info"><span class="skill-name">Node.js / Backend Development</span><span class="skill-pct">82%</span></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
-      <div class="skill-row"><div class="skill-info"><span class="skill-name">Software Testing & QA</span><span class="skill-pct">90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
-      <div class="skill-row"><div class="skill-info"><span class="skill-name">Database Systems</span><span class="skill-pct">78%</span></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
-      <div class="skill-row"><div class="skill-info"><span class="skill-name">UI/UX Design (Figma)</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
-      <div class="skill-row"><div class="skill-info"><span class="skill-name">CI/CD & DevOps</span><span class="skill-pct">75%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
+      <div class="focus-card">
+        <div class="focus-title">Focus Areas</div>
+        <div class="focus-item"><span class="focus-dot"></span><div><div class="focus-name">Full-Stack Web Development</div><div class="focus-sub">React · Next.js · Node.js · Express · PERN stack</div></div></div>
+        <div class="focus-item"><span class="focus-dot"></span><div><div class="focus-name">Software Quality Engineering</div><div class="focus-sub">Automation · White-box · Black-box · CI/CD pipelines</div></div></div>
+        <div class="focus-item"><span class="focus-dot"></span><div><div class="focus-name">UI/UX Design</div><div class="focus-sub">Figma · Wireframes · Prototyping · Responsive design</div></div></div>
+        <div class="focus-item"><span class="focus-dot"></span><div><div class="focus-name">Databases & Backend</div><div class="focus-sub">PostgreSQL · MS SQL Server · Firebase · Supabase · MongoDB</div></div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -297,16 +316,46 @@ footer span{color:var(--aqua)}
     <h2 class="section-title">Things I've <span>Built</span></h2>
     <div class="section-line"></div>
   </div>
+  <div class="proj-filters reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web & AI</button>
+    <button class="filter-btn" data-filter="qa">QA & Testing</button>
+    <button class="filter-btn" data-filter="uiux">UI/UX Design</button>
+    <button class="filter-btn" data-filter="database">Database & Backend</button>
+    <button class="filter-btn" data-filter="oop">OOP & Data Structures</button>
+    <button class="filter-btn" data-filter="games">Game Development</button>
+  </div>
   <div class="proj-grid reveal">
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">01</span><span class="proj-emoji">🔁</span></div><div class="proj-title">CI/CD Quality Pipeline</div><div class="proj-desc">Automated CI/CD workflows with testing, deployment validation, staging verification, and monitoring for open-source applications.</div><div class="proj-techs"><span class="tech-pill">Jenkins</span><span class="tech-pill">GitHub Actions</span><span class="tech-pill">Pytest</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">02</span><span class="proj-emoji">🛒</span></div><div class="proj-title">E-Commerce Website</div><div class="proj-desc">Full online store with product listings, cart, checkout flow, search filters, user accounts, and payment gateway integration.</div><div class="proj-techs"><span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">JavaScript</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">03</span><span class="proj-emoji">🏦</span></div><div class="proj-title">Banking System</div><div class="proj-desc">Secure banking platform with dashboards, transaction history, fund transfers, real-time authentication, and live database updates.</div><div class="proj-techs"><span class="tech-pill">Firebase</span><span class="tech-pill">JavaScript</span><span class="tech-pill">REST APIs</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">04</span><span class="proj-emoji">🎬</span></div><div class="proj-title">Movie Website</div><div class="proj-desc">Responsive movie site with TMDB API integration for dynamic content, search, and filtering functionality.</div><div class="proj-techs"><span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">TMDB API</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">05</span><span class="proj-emoji">🤖</span></div><div class="proj-title">Test Automation (Cypress)</div><div class="proj-desc">Automated black-box test cases with Cypress Cloud integration for validation, reporting, and defect analysis.</div><div class="proj-techs"><span class="tech-pill">Cypress</span><span class="tech-pill">QA Automation</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">06</span><span class="proj-emoji">💼</span></div><div class="proj-title">Job Career Connect</div><div class="proj-desc">Database-driven recruitment platform managing interviews, recruiter data, student profiles, and job fair workflows.</div><div class="proj-techs"><span class="tech-pill">MS SQL Server</span><span class="tech-pill">Visual Studio</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">07</span><span class="proj-emoji">🏥</span></div><div class="proj-title">Healthcare System</div><div class="proj-desc">Patient records, doctor management, and appointment scheduling built using OOP principles in C++.</div><div class="proj-techs"><span class="tech-pill">C++</span><span class="tech-pill">OOP</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">08</span><span class="proj-emoji">🎮</span></div><div class="proj-title">Brick Breaker Game</div><div class="proj-desc">Retro arcade game in Assembly demonstrating low-level programming concepts and collision handling.</div><div class="proj-techs"><span class="tech-pill">Assembly MASM</span><span class="tech-pill">Visual Studio</span></div></div>
-    <div class="proj-card"><div class="proj-top"><span class="proj-num">09</span><span class="proj-emoji">🔍</span></div><div class="proj-title">SQE Quality Project</div><div class="proj-desc">Defect tracking, QA workflows, and software quality analysis evaluating maintainability, reliability, and security hotspots.</div><div class="proj-techs"><span class="tech-pill">Jira</span><span class="tech-pill">SonarQube</span></div></div>
+    <!-- WEB & AI -->
+    <div class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-num">01</span><span class="proj-emoji">🧠</span></div><div class="proj-title">AI Optimizer</div><div class="proj-desc">Web-based optimization tool with an interactive interface for running and visualizing AI-driven optimization workflows in real time.</div><div class="proj-techs"><span class="tech-pill">Streamlit</span><span class="tech-pill">Python</span></div></div>
+    <div class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-num">02</span><span class="proj-emoji">📄</span></div><div class="proj-title">AI AskDocs</div><div class="proj-desc">Retrieval-based Q&A tool that answers questions from your PDFs with page citations, and refuses when the answer isn't in the documents.</div><div class="proj-techs"><span class="tech-pill">Python</span><span class="tech-pill">LLM API</span><span class="tech-pill">CLI</span></div></div>
+    <div class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-num">03</span><span class="proj-emoji">💼</span></div><div class="proj-title">Freelancer Gig Marketplace</div><div class="proj-desc">Gig Marketplace module for a national freelance platform. Full user flow from Figma prototype to working gig creation, editing, and real-time updates on a PERN stack.</div><div class="proj-techs"><span class="tech-pill">PostgreSQL</span><span class="tech-pill">Express</span><span class="tech-pill">React</span><span class="tech-pill">Node.js</span><span class="tech-pill">Supabase</span></div></div>
+    <div class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-num">04</span><span class="proj-emoji">🎬</span></div><div class="proj-title">Movie Website</div><div class="proj-desc">Responsive movie promotion site with Home, About, Contact, and Movie Details pages. TMDB API integration for dynamic content with search and filtering.</div><div class="proj-techs"><span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">JavaScript</span><span class="tech-pill">TMDB API</span></div></div>
+    <div class="proj-card" data-cat="web"><div class="proj-top"><span class="proj-num">05</span><span class="proj-emoji">🛒</span></div><div class="proj-title">E-Commerce Website</div><div class="proj-desc">Online store featuring product listings, shopping cart, checkout flow, search filters, user accounts, and payment gateway integration.</div><div class="proj-techs"><span class="tech-pill">HTML</span><span class="tech-pill">CSS</span><span class="tech-pill">JavaScript</span></div></div>
+    <div class="proj-card" data-cat="web database"><div class="proj-top"><span class="proj-num">06</span><span class="proj-emoji">🏦</span></div><div class="proj-title">Banking Website</div><div class="proj-desc">Secure banking system with dashboards, transaction history, fund transfers, authentication, and real-time database updates.</div><div class="proj-techs"><span class="tech-pill">Firebase</span><span class="tech-pill">JavaScript</span><span class="tech-pill">REST APIs</span></div></div>
+
+    <!-- QA & TESTING -->
+    <div class="proj-card" data-cat="qa"><div class="proj-top"><span class="proj-num">07</span><span class="proj-emoji">🔍</span></div><div class="proj-title">Software Quality Engineering Project</div><div class="proj-desc">Managed defect tracking, QA workflows, and software quality analysis evaluating maintainability, reliability, complexity, and security hotspots.</div><div class="proj-techs"><span class="tech-pill">Jira</span><span class="tech-pill">SonarQube</span></div></div>
+    <div class="proj-card" data-cat="qa"><div class="proj-top"><span class="proj-num">08</span><span class="proj-emoji">🧪</span></div><div class="proj-title">White-Box &amp; Unit Testing</div><div class="proj-desc">Designed and executed unit tests for QGroundControl achieving statement, branch, and MC/DC coverage using white-box testing techniques.</div><div class="proj-techs"><span class="tech-pill">C++</span><span class="tech-pill">Qt Test Framework</span></div></div>
+    <div class="proj-card" data-cat="qa"><div class="proj-top"><span class="proj-num">09</span><span class="proj-emoji">🎯</span></div><div class="proj-title">Black-Box Testing &amp; Test Case Design</div><div class="proj-desc">Performed black-box testing on Portfolio Visualizer using Equivalence Class Partitioning and Boundary Value Analysis techniques.</div><div class="proj-techs"><span class="tech-pill">ECP</span><span class="tech-pill">BVA</span></div></div>
+    <div class="proj-card" data-cat="qa"><div class="proj-top"><span class="proj-num">10</span><span class="proj-emoji">🤖</span></div><div class="proj-title">Test Automation with Cypress</div><div class="proj-desc">Automated black-box test cases and integrated execution reporting with Cypress Cloud for validation, reporting, and defect analysis.</div><div class="proj-techs"><span class="tech-pill">Cypress</span><span class="tech-pill">QA Automation</span></div></div>
+    <div class="proj-card" data-cat="qa"><div class="proj-top"><span class="proj-num">11</span><span class="proj-emoji">🔁</span></div><div class="proj-title">CI/CD Quality Engineering Pipeline</div><div class="proj-desc">Automated CI/CD workflows integrating testing, deployment validation, staging verification, and monitoring for open-source applications.</div><div class="proj-techs"><span class="tech-pill">Jenkins</span><span class="tech-pill">GitHub Actions</span><span class="tech-pill">Pytest</span></div></div>
+
+    <!-- UI/UX DESIGN -->
+    <div class="proj-card" data-cat="uiux"><div class="proj-top"><span class="proj-num">12</span><span class="proj-emoji">🚌</span></div><div class="proj-title">Bus Reservation System</div><div class="proj-desc">Responsive UI/UX prototype for seat reservation and booking workflows, designed with modern design principles.</div><div class="proj-techs"><span class="tech-pill">Figma</span></div></div>
+    <div class="proj-card" data-cat="uiux"><div class="proj-top"><span class="proj-num">13</span><span class="proj-emoji">🧭</span></div><div class="proj-title">Online Job Platform</div><div class="proj-desc">User-friendly recruitment and job search platform interface with intuitive navigation and clean, consistent layouts.</div><div class="proj-techs"><span class="tech-pill">Figma</span></div></div>
+
+    <!-- DATABASE & BACKEND -->
+    <div class="proj-card" data-cat="database"><div class="proj-top"><span class="proj-num">14</span><span class="proj-emoji">🎓</span></div><div class="proj-title">Job Career Connect</div><div class="proj-desc">Database-driven recruitment platform managing interviews, recruiter data, student profiles, and job fair workflows.</div><div class="proj-techs"><span class="tech-pill">MS SQL Server</span><span class="tech-pill">Visual Studio</span></div></div>
+
+    <!-- OOP & DATA STRUCTURES -->
+    <div class="proj-card" data-cat="oop"><div class="proj-top"><span class="proj-num">15</span><span class="proj-emoji">🏥</span></div><div class="proj-title">Healthcare System</div><div class="proj-desc">Healthcare management system handling patient records, doctor management, and appointment scheduling using OOP concepts.</div><div class="proj-techs"><span class="tech-pill">C++</span><span class="tech-pill">OOP</span></div></div>
+    <div class="proj-card" data-cat="oop"><div class="proj-top"><span class="proj-num">16</span><span class="proj-emoji">🏨</span></div><div class="proj-title">Hotel Ordering System</div><div class="proj-desc">Order management functionality implemented using stacks, queues, and linked lists for efficient processing.</div><div class="proj-techs"><span class="tech-pill">C++</span><span class="tech-pill">Data Structures</span></div></div>
+
+    <!-- GAME DEVELOPMENT -->
+    <div class="proj-card" data-cat="games"><div class="proj-top"><span class="proj-num">17</span><span class="proj-emoji">🧱</span></div><div class="proj-title">Brick Breaker Game</div><div class="proj-desc">Retro-style arcade game demonstrating low-level programming concepts, collision handling, and teamwork.</div><div class="proj-techs"><span class="tech-pill">Assembly (MASM)</span><span class="tech-pill">Visual Studio</span></div></div>
+    <div class="proj-card" data-cat="games"><div class="proj-top"><span class="proj-num">18</span><span class="proj-emoji">👻</span></div><div class="proj-title">Pac-Man Game</div><div class="proj-desc">Console-based Pac-Man built using operating system concepts, memory handling, and structured game logic.</div><div class="proj-techs"><span class="tech-pill">C Language</span></div></div>
+    <div class="proj-card" data-cat="games"><div class="proj-top"><span class="proj-num">19</span><span class="proj-emoji">⚔️</span></div><div class="proj-title">Risk Game</div><div class="proj-desc">Turn-based strategy game featuring game mechanics, user interaction, and AI-based behavior.</div><div class="proj-techs"><span class="tech-pill">C++</span><span class="tech-pill">Ubuntu</span></div></div>
   </div>
 </div>
 
@@ -319,8 +368,9 @@ footer span{color:var(--aqua)}
     <div class="section-line"></div>
   </div>
   <div class="timeline reveal">
-    <div class="t-item"><div class="t-dot"></div><div class="t-card"><div class="t-role">Web Developer Intern</div><div class="t-org">Intern Intelligence</div><div class="t-desc">Built responsive UI components using HTML, CSS, JavaScript. Integrated Firebase for real-time database functionality and implemented Stripe payment gateway for seamless transactions.</div></div></div>
-    <div class="t-item"><div class="t-dot"></div><div class="t-card"><div class="t-role">Web Developer Intern</div><div class="t-org">Developers Cohub</div><div class="t-desc">Developed modern frontend interfaces using React.js and integrated backend functionality with Node.js. Worked on full-stack features and REST API integrations in a collaborative environment.</div></div></div>
+    <div class="t-item"><div class="t-dot"></div><div class="t-card"><div class="t-role">Web Developer Intern</div><div class="t-org">Software Internship</div><div class="t-desc">Built responsive UI components using HTML, CSS, JavaScript. Integrated Firebase for real-time database functionality and implemented Stripe payment gateway for seamless transactions.</div></div></div>
+    <div class="t-item"><div class="t-dot"></div><div class="t-card"><div class="t-role">UI/UX Intern</div><div class="t-org">Design Internship</div><div class="t-desc">Designed fully functional app prototypes with responsive design and consistent color palettes. Created wireframes through to high-fidelity mockups.</div></div></div>
+    <div class="t-item"><div class="t-dot"></div><div class="t-card"><div class="t-role">Lab Demonstrator — Operating Systems Lab</div><div class="t-org">FAST NUCES, Islamabad</div><div class="t-desc">Helped students debug C/C++ code and understand OS concepts like scheduling, memory, and file systems. Graded lab tasks and provided feedback.</div></div></div>
     <div class="t-item"><div class="t-dot" style="background:var(--coral);box-shadow:0 0 0 3px rgba(255,107,107,0.2),0 0 12px var(--coral)"></div><div class="t-card"><div class="t-role">B.S. Software Engineering</div><div class="t-org">FAST NUCES, Islamabad — CGPA 3.06</div><div class="t-desc">Core subjects: Data Structures, Database Systems, OOP, Software Quality Engineering, Software Project Management, Software Design & Construction, Operating Systems, Design & Analysis of Algorithms.</div></div></div>
   </div>
 </div>
@@ -415,14 +465,26 @@ function type(){
 const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
 
-// Skill bars
-const sObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.width+'%')})},{threshold:0.3});
-document.querySelectorAll('.about-grid').forEach(el=>sObs.observe(el));
+// Project category filters
+const filterBtns=document.querySelectorAll('.filter-btn');
+const projCards=document.querySelectorAll('.proj-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    projCards.forEach(card=>{
+      const cats=(card.dataset.cat||'').split(' ');
+      if(f==='all'||cats.includes(f)) card.classList.remove('hidden');
+      else card.classList.add('hidden');
+    });
+  });
+});
 
 // Counters
 const cObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('[data-target]').forEach(el=>{
   const t=+el.dataset.target;let c=0;const step=t/40;
-  const tmr=setInterval(()=>{c=Math.min(c+step,t);el.textContent=Math.floor(c)+(t===15?'+':'');if(c>=t)clearInterval(tmr)},40);
+  const tmr=setInterval(()=>{c=Math.min(c+step,t);el.textContent=Math.floor(c)+(t===19?'+':'');if(c>=t)clearInterval(tmr)},40);
 })})},{threshold:0.5});
 document.querySelectorAll('.hero-stats').forEach(el=>cObs.observe(el));
 
